@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "nodenext",
+        "esModuleInterop": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true,
+        "lib": ["ESNext"],
+        "module": "nodenext"
+    }
+}

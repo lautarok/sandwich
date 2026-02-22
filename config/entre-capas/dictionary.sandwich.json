@@ -1,0 +1,54 @@
+{
+    "products": {
+
+        "pbt": "pebete",
+        "pebete": "pebete",
+        "pebetes": "pebete",
+
+        "miga": "miga",
+        "mga": "miga",
+        "mig": "miga"
+
+    },
+    "features": {
+
+        "jamon": "ham_and_cheese",
+        "jamon y queso": "ham_and_cheese",
+        "jyq": "ham_and_cheese",
+        "j y q": "ham_and_cheese",
+        "jy q": "ham_and_cheese",
+        "j yq": "ham_and_cheese",
+
+        "salame": "salami",
+        "salam": "salami",
+        "milan": "salami",
+        "mlan": "salami",
+
+        "verdura": "vegetable",
+        "verdu": "vegetable",
+        "verd": "vegetable",
+        "verur": "vegetable"
+
+    },
+    "quantities": {
+
+        "un medio": 0.5,
+        "una media": 0.5,
+        "medio": 0.5,
+        "media": 0.5,
+        "med": 0.5,
+        "medi": 0.5,
+        "1/2": 0.5,
+
+        "uno": 1,
+        "una": 1,
+        "un": 1,
+
+        "dos": 2,
+        "tres": 3,
+        "cuatro": 4
+        
+    },
+    "terminators": [",", ".", "\n"],
+    "conjunctions": ["y", "+", "más", "mas"]
+}

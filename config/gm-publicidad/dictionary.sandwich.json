@@ -1,0 +1,72 @@
+{
+    "products": {
+
+        "billetera": "billetera playera",
+        "billetra": "billetera playera",
+        "bille": "billetera playera",
+        "biletera": "billetera playera",
+
+        "portacontrol": "portacontrol ecologico",
+        "portacontroles": "portacontrol ecologico",
+        "portacntroles": "portacontrol ecologico",
+        "portacntrol": "portacontrol ecologico",
+        "portacontrol ecologico": "portacontrol ecologico",
+        "portacontroles ecologico": "portacontrol ecologico",
+        "portacntroles ecologico": "portacontrol ecologico",
+        "portacntrol eco": "portacontrol ecologico",
+        "portacontrol eco": "portacontrol ecologico",
+        "portacontroles eco": "portacontrol ecologico",
+        "portacntroles eco": "portacontrol ecologico",
+
+        "portacontrol pvc": "portacontrol pvc",
+        "portacontrl pc": "portacontrol pvc",
+        "portcontrol pcv": "portacontrol pvc",
+        "prtacontrol pc": "portacontrol pvc",
+        "portacontrol pcv": "portacontrol pvc"
+
+    },
+    "features": {
+
+        "xl": "xl",
+        "grande": "xl",
+        "gande": "xl",
+        "gandes": "xl",
+        "grandes": "xl",
+        "grand": "xl",
+
+        "sm": "sm",
+        "chica": "sm",
+        "chico": "sm",
+        "chicos": "sm",
+        "chicas": "sm",
+        "chiquita": "sm",
+
+        "md": "md",
+        "mediana": "md",
+        "mdiana": "md",
+        "median": "md",
+        "mediano": "md",
+        "medianos": "md",
+        "medianas": "md"
+
+    },
+    "quantities": {
+
+        "uno": 1,
+        "una": 1,
+        "un": 1,
+
+        "dos": 2,
+        "tres": 3,
+        "cinco": 5,
+        "seis": 6,
+        "siete": 7,
+        "ocho": 8,
+        "nueve": 9,
+        "diez": 10,
+        "once": 11
+        
+    },
+    "terminators": [",", ".", "\n"],
+    "conjunctions": ["y", "+", "más", "mas"]
+}

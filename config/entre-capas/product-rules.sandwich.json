@@ -1,0 +1,29 @@
+{
+    "pebete": {
+        "default": "ham_and_cheese",
+        "multiplicator": 12,
+        "quantityStep": 6,
+        "features": [
+            "ham_and_cheese",
+            "salami"
+        ],
+        "alternate": [
+            "ham_and_cheese",
+            "salami"
+        ]
+    },
+
+    "miga": {
+        "default": "ham_and_cheese",
+        "quantityStep": 6,
+        "multiplicator": 12,
+        "features": [
+            "ham_and_cheese",
+            "vegetable"
+        ],
+        "alternate": [
+            "ham_and_cheese",
+            "vegetable"
+        ]
+    }
+}

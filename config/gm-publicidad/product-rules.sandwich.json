@@ -1,0 +1,24 @@
+{
+    "portacontrol pvc": {
+        "default": "sm",
+        "features": [
+            "sm",
+            "xl"
+        ]
+    },
+    "portacontrol ecologico": {
+        "default": "sm",
+        "features": [
+            "sm",
+            "md",
+            "xl"
+        ]
+    },
+    "billetera playera": {
+        "default": "sm",
+        "features": [
+            "sm",
+            "md"
+        ]
+    }
+}
