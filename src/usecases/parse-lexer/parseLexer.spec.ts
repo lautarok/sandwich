@@ -8,7 +8,8 @@ describe("parse lexer usecase", () => {
         const dictionary = new Dictionary({
             products: {
                 "test": "test-value",
-                "test with spaces": "test with spaces value"
+                "test with spaces": "test with spaces value",
+                "mayus test": "mayus test value"
             },
             features: {
                 "test feature": "test feature value"
@@ -34,6 +35,16 @@ describe("parse lexer usecase", () => {
             type: "product",
             value: "test-value",
             word: "test"
+        }])
+    })
+
+    it("identify product from capitalized word", () => {
+        const lexerResult = parseLexer.execute("Mayus Test")
+
+        deepEqual(lexerResult, [{
+            type: "product",
+            value: "mayus test value",
+            word: "mayus test"
         }])
     })
 
