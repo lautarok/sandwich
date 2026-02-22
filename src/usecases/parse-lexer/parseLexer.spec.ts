@@ -4,24 +4,28 @@ import Dictionary from "../../adapters/secondary/dictionary/dictionary.ts"
 import { deepEqual } from "node:assert/strict"
 
 describe("parse lexer usecase", () => {
-    const dictionary = new Dictionary({
-        products: {
-            "test": "test-value",
-            "test with spaces": "test with spaces value"
-        },
-        features: {
-            "test feature": "test feature value"
-        },
-        quantities: {
-            "two": 2
-        },
-        conjunctions: ["and"],
-        terminators: ["."]
-    })
+    const createMock = () => {
+        const dictionary = new Dictionary({
+            products: {
+                "test": "test-value",
+                "test with spaces": "test with spaces value"
+            },
+            features: {
+                "test feature": "test feature value"
+            },
+            quantities: {
+                "two": 2
+            },
+            conjunctions: ["and"],
+            terminators: ["."]
+        })
 
-    const parseLexer = new ParseLexer({
-        dictionary
-    })
+        return new ParseLexer({
+            dictionary
+        })
+    }
+
+    const parseLexer = createMock()
 
     it("identify product from word", () => {
         const lexerResult = parseLexer.execute("test")
