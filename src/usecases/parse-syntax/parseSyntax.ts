@@ -49,6 +49,7 @@ export default class ParseSyntax implements BaseUsecase<OrderSyntax> {
                         (
                             tokenType === "conjunction"
                             || tokenType === "quantity"
+                            || tokenType === "product"
                         )
                         && nextProducts.length > 0
                     )
