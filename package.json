@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node --test \"src/**/usecases/**/*.spec.ts\"",
     "start": "node --env-file-if-exists=.env src/index.ts",
     "dev": "node --watch-path=config --watch-path=src --env-file=.env.development --watch src/index.ts"
   },
@@ -13,6 +13,7 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "baileys": "^7.0.0-rc.9",
     "express": "^5.2.1"
   },
   "devDependencies": {

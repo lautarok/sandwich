@@ -1,10 +1,10 @@
 import express from "express"
-import ParseLexer from "../../usecases/parse-lexer/parseLexer.ts"
-import ParseSyntax from "../../usecases/parse-syntax/parseSyntax.ts"
+import ParseLexer from "../../../usecases/parse-lexer/parseLexer.ts"
+import ParseSyntax from "../../../usecases/parse-syntax/parseSyntax.ts"
 import router from "./router.ts"
 import GlobalErrorsMiddleware from "./middlewares/global-errors.middleware.ts"
 import CorsMiddleware from "./middlewares/cors.middleware.ts"
-import ParseSemantic from "../../usecases/parse-semantic/parseSemantic.ts"
+import ParseSemantic from "../../../usecases/parse-semantic/parseSemantic.ts"
 
 interface deps {
     parseLexer: ParseLexer

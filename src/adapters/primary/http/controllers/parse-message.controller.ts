@@ -1,8 +1,8 @@
 import { type Request, type Response } from "express"
-import ParseLexer from "../../../usecases/parse-lexer/parseLexer.ts"
-import ParseSyntax from "../../../usecases/parse-syntax/parseSyntax.ts"
+import ParseLexer from "../../../../usecases/parse-lexer/parseLexer.ts"
+import ParseSyntax from "../../../../usecases/parse-syntax/parseSyntax.ts"
 import BaseController from "../base/controller.base.ts"
-import ParseSemantic from "../../../usecases/parse-semantic/parseSemantic.ts"
+import ParseSemantic from "../../../../usecases/parse-semantic/parseSemantic.ts"
 
 interface deps {
     parseLexer: ParseLexer

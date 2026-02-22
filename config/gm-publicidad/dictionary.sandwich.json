@@ -5,6 +5,8 @@
         "billetra": "billetera playera",
         "bille": "billetera playera",
         "biletera": "billetera playera",
+        "bileteras": "billetera playera",
+        "billeteras": "billetera playera",
 
         "portacontrol": "portacontrol ecologico",
         "portacontroles": "portacontrol ecologico",
@@ -22,7 +24,10 @@
         "portacontrl pc": "portacontrol pvc",
         "portcontrol pcv": "portacontrol pvc",
         "prtacontrol pc": "portacontrol pvc",
-        "portacontrol pcv": "portacontrol pvc"
+        "portacontrol pcv": "portacontrol pvc",
+        "portacontroles pcv": "portacontrol pvc",
+        "portacontroles pvc": "portacontrol pvc",
+        "portacontroles pc": "portacontrol pvc"
 
     },
     "features": {
@@ -46,6 +51,7 @@
         "mdiana": "md",
         "median": "md",
         "mediano": "md",
+        "medio": "md",
         "medianos": "md",
         "medianas": "md"
 

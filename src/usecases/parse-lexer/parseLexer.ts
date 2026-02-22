@@ -34,7 +34,9 @@ class ParseLexer implements BaseUsecase<Token[]> {
     private parseTokens(words: string[]): Token[] {
         return words
             .map<Token | null>(word => {
-                const matchProduct = this.dictionary.getProduct(word.replaceAll("%20", " "))
+                word = word.replaceAll("%20", " ")
+
+                const matchProduct = this.dictionary.getProduct(word)
                 if (matchProduct) {
                     return {
                         type: "product",
@@ -43,7 +45,7 @@ class ParseLexer implements BaseUsecase<Token[]> {
                     }
                 }
 
-                const matchFeature = this.dictionary.getFeature(word.replaceAll("%20", " "))
+                const matchFeature = this.dictionary.getFeature(word)
                 if (matchFeature) {
                     return {
                         type: "feature",
@@ -52,7 +54,7 @@ class ParseLexer implements BaseUsecase<Token[]> {
                     }
                 }
 
-                const matchQuantity = this.dictionary.getQuantity(word.replaceAll("%20", " "))
+                const matchQuantity = this.dictionary.getQuantity(word)
                 if (matchQuantity) {
                     return {
                         type: "quantity",
@@ -61,7 +63,7 @@ class ParseLexer implements BaseUsecase<Token[]> {
                     }
                 }
 
-                const matchConjunction = this.dictionary.isConjunction(word.replaceAll("%20", " "))
+                const matchConjunction = this.dictionary.isConjunction(word)
                 if (matchConjunction) {
                     return {
                         type: "conjunction",
@@ -69,7 +71,7 @@ class ParseLexer implements BaseUsecase<Token[]> {
                     }
                 }
 
-                const matchTerminator = this.dictionary.isTerminator(word.replaceAll("%20", " "))
+                const matchTerminator = this.dictionary.isTerminator(word)
                 if (matchTerminator) {
                     return {
                         type: "terminator",

@@ -1,5 +1,5 @@
 import { type NextFunction, type Request, type Response } from "express"
-import InvalidInputError from "../../../errors/invalidInput.error.ts"
+import InvalidInputError from "../../../../errors/invalidInput.error.ts"
 import BaseMiddleware from "../base/middleware.base.ts"
 
 export default class HasMessageMiddleware implements BaseMiddleware {

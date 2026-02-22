@@ -1,4 +1,4 @@
-import ExpressAdapter from "./adapters/primary/express.ts"
+import ExpressAdapter from "./adapters/primary/http/express.ts"
 import Dictionary from "./adapters/secondary/dictionary/dictionary.ts"
 import ProductRules from "./adapters/secondary/productRules/productRules.ts"
 import ParseLexer from "./usecases/parse-lexer/parseLexer.ts"
