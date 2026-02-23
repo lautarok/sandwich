@@ -17,11 +17,6 @@ export default class Dictionary implements DictionaryPort {
         ]
     }
 
-    static async initialize() {
-        const dictionary = await loadDictionary()
-        return new Dictionary(dictionary)
-    }
-
     getProduct(word: string): string | null {
         return this.dictionary.products[word] ?? null
     }

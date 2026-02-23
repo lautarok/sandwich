@@ -5,9 +5,14 @@ import ProductRules from "./adapters/productRules/outbound/productRules.ts"
 import ParseLexer from "./usecases/parse-lexer/parseLexer.ts"
 import ParseSemantic from "./usecases/parse-semantic/parseSemantic.ts"
 import ParseSyntax from "./usecases/parse-syntax/parseSyntax.ts"
+import loadDictionary from "./config/dictionary.config.ts"
+import loadProductRules from "./config/productRules.config.ts"
 
-const dictionary = await Dictionary.initialize(),
-    productRules = await ProductRules.initialize()
+const dictionaryConfig = await loadDictionary(),
+    productRulesConfig = await loadProductRules()
+
+const dictionary = new Dictionary(dictionaryConfig),
+    productRules = new ProductRules(productRulesConfig)
 
 const parseLexer = new ParseLexer({
     dictionary

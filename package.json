@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node --test \"src/**/usecases/**/*.spec.ts\"",
-    "coverage": "node --experimental-test-coverage --test \"src/**/usecases/**/*.spec.ts\"",
+    "test": "node --test \"src/**/*.spec.ts\"",
+    "coverage": "node --experimental-test-coverage --test-coverage-exclude=\"src/config/**\" --test \"src/**/*.spec.ts\"",
     "start": "node --env-file-if-exists=.env src/index.ts",
     "dev": "node --watch-path=config --watch-path=src --env-file=.env.development --watch src/index.ts"
   },
