@@ -12,8 +12,8 @@ export default class Dictionary implements DictionaryPort {
             ...Object.keys(initialDictionary.products),
             ...Object.keys(initialDictionary.features),
             ...Object.keys(initialDictionary.quantities),
-            ...Object.keys(initialDictionary.conjunctions),
-            ...Object.keys(initialDictionary.terminators)
+            ...initialDictionary.conjunctions,
+            ...initialDictionary.terminators
         ]
     }
 
