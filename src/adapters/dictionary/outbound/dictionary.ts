@@ -1,4 +1,3 @@
-import loadDictionary from "../../../config/dictionary.config.ts"
 import type DictionaryPort from "../../../ports/dictionary.ts"
 import type DictionaryType from "../../../domain/dictionary.ts"
 
