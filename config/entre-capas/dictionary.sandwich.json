@@ -2,10 +2,13 @@
     "products": {
 
         "pbt": "pebete",
+        "1pbt": "pebete",
         "pebete": "pebete",
+        "1pebete": "pebete",
         "pebetes": "pebete",
 
         "miga": "miga",
+        "1miga": "miga",
         "mga": "miga",
         "mig": "miga"
 
@@ -22,9 +25,11 @@
         "salame": "salami",
         "salam": "salami",
         "milan": "salami",
+        "milán": "salami",
         "mlan": "salami",
 
         "verdura": "vegetable",
+        "verduras": "vegetable",
         "verdu": "vegetable",
         "verd": "vegetable",
         "verur": "vegetable"

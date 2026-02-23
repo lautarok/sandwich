@@ -43,7 +43,8 @@ export default class BaileysAdapter {
             const {connection, lastDisconnect, qr} = update
 
             if (qr) {
-                console.log("Escanea este QR", qrcode.generate(qr, {small: true}))
+                console.log("Escanea este QR")
+                qrcode.generate(qr, {small: true})
             }
 
             if (connection === "close") {
@@ -70,16 +71,29 @@ export default class BaileysAdapter {
                 message.message.conversation
                 || message.message.extendedTextMessage?.text
 
+            if (!text) return
+
+            if (text === "/ping") {
+                await sock.sendMessage(from, {
+                    text: "pong ;)"
+                })
+            }
+
             const lexerResult = this.parseLexer.execute(text),
                 syntaxResult = this.parseSyntax.execute(lexerResult),
                 semanticResult = this.parseSemantic.execute(syntaxResult)
 
-            await sock.sendMessage(from, {
-                text: "Tu pedido:\n`" + semanticResult.items.reduce((acc, curr) => {
-                    acc.push(`x${curr.quantity} ${curr.product} ${curr.feature}`)
-                    return acc
-                }, []).join("\n") + "`"
-            })
+            console.log(text)
+            console.log({...semanticResult})
+
+            if (semanticResult.items.length > 0) {
+                await sock.sendMessage(from, {
+                    text: "Tu pedido:\n`" + semanticResult.items.reduce((acc, curr) => {
+                        acc.push(`x${curr.quantity} ${curr.product} ${curr.feature}`)
+                        return acc
+                    }, []).join("\n") + "`"
+                })
+            }
         })
     }
 }
