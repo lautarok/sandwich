@@ -33,7 +33,7 @@ class ParseLexer implements BaseUsecase<Token[]> {
 
     private parseTokens(words: string[]): Token[] {
         return words
-            .map<Token | null>(word => {
+            .flatMap<Token | null>(word => {
                 word = word.replaceAll("%20", " ")
 
                 const matchProduct = this.dictionary.getProduct(word)
@@ -79,7 +79,7 @@ class ParseLexer implements BaseUsecase<Token[]> {
                     }
                 }
                 
-                if (/^[0-9]+$/.test(word)) {
+                else if (/^[0-9]+$/.test(word)) {
                     return {
                         type: "quantity",
                         value: parseFloat(word),
@@ -87,8 +87,35 @@ class ParseLexer implements BaseUsecase<Token[]> {
                     }
                 }
 
+                else if (/\d/.test(word)) {
+                    console.log(word.replaceAll(/\D/g, ""))
+                    return this.parseTokens([
+                        word.replaceAll(/\D/g, ""),
+                        word.replaceAll(/\d/g, "")
+                    ])
+                }
+
+                const allWords = this.dictionary.getAllWords()
+                const tokenIndex = allWords
+                    .findIndex(dWord => word.includes(dWord))
+
+                if (tokenIndex >= 0) {
+                    if (tokenIndex < (word.length - allWords[tokenIndex].length) / 2) {
+                        return this.parseTokens([
+                            allWords[tokenIndex],
+                            word.replaceAll(allWords[tokenIndex], "")
+                        ])
+                    } else {
+                        return this.parseTokens([
+                            word.replaceAll(allWords[tokenIndex], ""),
+                            allWords[tokenIndex]
+                        ])
+                    }
+                }
+
                 return null
-            }).filter(Boolean)
+            })
+            .filter(Boolean)
     }
 
     execute(input: string): Token[] {
