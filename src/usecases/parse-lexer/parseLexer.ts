@@ -78,28 +78,12 @@ class ParseLexer implements BaseUsecase<Token[]> {
                         word
                     }
                 }
-                
-                else if (/^[0-9]+$/.test(word)) {
-                    return {
-                        type: "quantity",
-                        value: parseFloat(word),
-                        word
-                    }
-                }
-
-                else if (/\d/.test(word)) {
-                    console.log(word.replaceAll(/\D/g, ""))
-                    return this.parseTokens([
-                        word.replaceAll(/\D/g, ""),
-                        word.replaceAll(/\d/g, "")
-                    ])
-                }
 
                 const allWords = this.dictionary.getAllWords()
                 const tokenIndex = allWords
                     .findIndex(dWord => word.includes(dWord))
 
-                if (tokenIndex >= 0) {
+                if (tokenIndex >= 0 && allWords[tokenIndex].length < word.length) {
                     if (tokenIndex < (word.length - allWords[tokenIndex].length) / 2) {
                         return this.parseTokens([
                             allWords[tokenIndex],
@@ -111,6 +95,21 @@ class ParseLexer implements BaseUsecase<Token[]> {
                             allWords[tokenIndex]
                         ])
                     }
+                }
+
+                else if (/^[0-9]+$/.test(word)) {
+                    return {
+                        type: "quantity",
+                        value: parseFloat(word),
+                        word
+                    }
+                }
+
+                else if (/\d/.test(word)) {
+                    return this.parseTokens([
+                        word.replaceAll(/\D/g, ""),
+                        word.replaceAll(/\d/g, "")
+                    ])
                 }
 
                 return null

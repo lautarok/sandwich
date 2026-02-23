@@ -1,10 +1,12 @@
 {
     "products": {
 
+        "p": "pebete",
         "pbt": "pebete",
         "pebete": "pebete",
         "pebetes": "pebete",
 
+        "m": "miga",
         "miga": "miga",
         "1miga": "miga",
         "mga": "miga",
@@ -13,6 +15,8 @@
     },
     "features": {
 
+        "j": "ham_and_cheese",
+        "q": "ham_and_chesse",
         "jamon": "ham_and_cheese",
         "jamon y queso": "ham_and_cheese",
         "jyq": "ham_and_cheese",
@@ -20,12 +24,14 @@
         "jy q": "ham_and_cheese",
         "j yq": "ham_and_cheese",
 
+        "s": "salami",
         "salame": "salami",
         "salam": "salami",
         "milan": "salami",
         "milán": "salami",
         "mlan": "salami",
 
+        "v": "vegetable",
         "verdura": "vegetable",
         "verduras": "vegetable",
         "verdu": "vegetable",
