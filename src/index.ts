@@ -1,4 +1,5 @@
 import ExpressAdapter from "./adapters/primary/http/express.ts"
+import BaileysAdapter from "./adapters/primary/whatsapp/baileys.ts"
 import Dictionary from "./adapters/secondary/dictionary/dictionary.ts"
 import ProductRules from "./adapters/secondary/productRules/productRules.ts"
 import ParseLexer from "./usecases/parse-lexer/parseLexer.ts"
@@ -19,6 +20,10 @@ const parseSemantic = new ParseSemantic({
 })
 
 const expressAdapter = new ExpressAdapter({
+    parseLexer, parseSyntax, parseSemantic
+})
+
+new BaileysAdapter({
     parseLexer, parseSyntax, parseSemantic
 })
 
