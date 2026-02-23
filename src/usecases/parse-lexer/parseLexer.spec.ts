@@ -216,4 +216,39 @@ describe("parse lexer usecase", () => {
             }
         ])
     })
+
+    it("simulate malformed order", () => {
+        const lexerResult = parseLexer.execute("twootest with test feature and test.")
+
+        deepEqual(lexerResult, [
+            {
+                type: "product",
+                value: "test-value",
+                word: "test"
+            },
+            {
+                type: "quantity",
+                value: 2,
+                word: "two"
+            },
+            {
+                type: "feature",
+                value: "test feature value",
+                word: "test feature"
+            },
+            {
+                type: "conjunction",
+                word: "and"
+            },
+            {
+                type: "product",
+                value: "test-value",
+                word: "test"
+            },
+            {
+                type: "terminator",
+                word: "."
+            }
+        ])
+    })
 })
