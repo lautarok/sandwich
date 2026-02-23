@@ -10,7 +10,7 @@ interface deps {
 }
 
 export default class ParseSemantic implements BaseUsecase<Order> {
-    productRules: ProductRulesPort
+    private productRules: ProductRulesPort
 
     constructor(deps: deps) {
         this.productRules = deps.productRules
