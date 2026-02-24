@@ -27,7 +27,10 @@ export default class ParseSyntax implements BaseUsecase<OrderSyntax> {
                     .find(t => t.type === "product")?.value,
 
                 lastQuantity = tokenGroup[tokenGroup.length-1]
-                    .find(t => t.type === "quantity")?.value
+                    .find(t => t.type === "quantity")?.value,
+
+                lastFeature = tokenGroup[tokenGroup.length-1]
+                    .find(t => t.type === "feature")?.value
 
             let nextProducts: Token[] = []
             for (let i = index; i < tokens.length; i++) {
@@ -44,7 +47,16 @@ export default class ParseSyntax implements BaseUsecase<OrderSyntax> {
             }
 
             if (
-                (lastProduct && lastQuantity && (
+                (
+                    (
+                        (
+                            lastProduct
+                            && lastQuantity
+                        ) || (
+                            lastProduct
+                            && lastFeature
+                        )
+                    ) && (
                     (
                         (
                             tokenType === "conjunction"
