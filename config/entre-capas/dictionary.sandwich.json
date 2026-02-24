@@ -15,28 +15,28 @@
     },
     "features": {
 
-        "j": "ham_and_cheese",
+        "j": "jamón y queso",
         "q": "ham_and_chesse",
-        "jamon": "ham_and_cheese",
-        "jamon y queso": "ham_and_cheese",
-        "jyq": "ham_and_cheese",
-        "j y q": "ham_and_cheese",
-        "jy q": "ham_and_cheese",
-        "j yq": "ham_and_cheese",
+        "jamon": "jamón y queso",
+        "jamon y queso": "jamón y queso",
+        "jyq": "jamón y queso",
+        "j y q": "jamón y queso",
+        "jy q": "jamón y queso",
+        "j yq": "jamón y queso",
 
-        "s": "salami",
-        "salame": "salami",
-        "salam": "salami",
-        "milan": "salami",
-        "milán": "salami",
-        "mlan": "salami",
+        "s": "salame",
+        "salame": "salame",
+        "salam": "salame",
+        "milan": "salame",
+        "milán": "salame",
+        "mlan": "salame",
 
-        "v": "vegetable",
-        "verdura": "vegetable",
-        "verduras": "vegetable",
-        "verdu": "vegetable",
-        "verd": "vegetable",
-        "verur": "vegetable"
+        "v": "verduras",
+        "verdura": "verduras",
+        "verduras": "verduras",
+        "verdu": "verduras",
+        "verd": "verduras",
+        "verur": "verduras"
 
     },
     "quantities": {

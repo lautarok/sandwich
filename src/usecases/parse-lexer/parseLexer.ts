@@ -83,7 +83,7 @@ class ParseLexer implements BaseUsecase<Token[]> {
                 const tokenIndex = allWords
                     .findIndex(dWord => word.includes(dWord))
 
-                if (tokenIndex >= 0 && allWords[tokenIndex].length < word.length) {
+                if (tokenIndex >= 0 && allWords[tokenIndex].length >= (word.length - word.length / 2)) {
                     if (tokenIndex < (word.length - allWords[tokenIndex].length) / 2) {
                         return this.parseTokens([
                             allWords[tokenIndex],

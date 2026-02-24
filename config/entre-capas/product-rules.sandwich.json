@@ -1,29 +1,29 @@
 {
     "pebete": {
-        "default": "ham_and_cheese",
+        "default": "jamón y queso",
         "multiplicator": 12,
         "quantityStep": 6,
         "features": [
-            "ham_and_cheese",
-            "salami"
+            "jamón y queso",
+            "salame"
         ],
         "alternate": [
-            "ham_and_cheese",
-            "salami"
+            "jamón y queso",
+            "salame"
         ]
     },
 
     "miga": {
-        "default": "ham_and_cheese",
+        "default": "jamón y queso",
         "quantityStep": 6,
         "multiplicator": 12,
         "features": [
-            "ham_and_cheese",
-            "vegetable"
+            "jamón y queso",
+            "verduras"
         ],
         "alternate": [
-            "ham_and_cheese",
-            "vegetable"
+            "jamón y queso",
+            "verduras"
         ]
     }
 }
