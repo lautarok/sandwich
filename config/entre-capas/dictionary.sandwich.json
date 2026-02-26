@@ -6,17 +6,13 @@
         "pebete": "pebete",
         "pebetes": "pebete",
 
-        "m": "miga",
         "miga": "miga",
-        "1miga": "miga",
         "mga": "miga",
         "mig": "miga"
 
     },
     "features": {
 
-        "j": "jamón y queso",
-        "q": "ham_and_chesse",
         "jamon": "jamón y queso",
         "jamon y queso": "jamón y queso",
         "jyq": "jamón y queso",
@@ -24,7 +20,6 @@
         "jy q": "jamón y queso",
         "j yq": "jamón y queso",
 
-        "s": "salame",
         "salame": "salame",
         "salam": "salame",
         "milan": "salame",

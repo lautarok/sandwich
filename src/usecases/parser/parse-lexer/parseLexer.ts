@@ -1,6 +1,6 @@
-import type Token from "../../domain/token.ts"
-import type DictionaryPort from "../../ports/dictionary.ts"
-import BaseUsecase from "../baseUsecase.ts"
+import type Token from "../../../domain/token.ts"
+import type DictionaryPort from "../../../ports/dictionary.ts"
+import BaseUsecase from "../../baseUsecase.ts"
 
 interface deps {
     dictionary: DictionaryPort

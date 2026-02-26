@@ -1,6 +1,6 @@
 import test, { describe, it } from "node:test"
 import ParseLexer from "./parseLexer.ts"
-import Dictionary from "../../adapters/dictionary/outbound/dictionary.ts"
+import Dictionary from "../../../adapters/dictionary/outbound/dictionary.ts"
 import { deepEqual } from "node:assert/strict"
 
 describe("parse lexer usecase", () => {

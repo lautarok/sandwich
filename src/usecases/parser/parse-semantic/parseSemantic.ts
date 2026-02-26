@@ -1,9 +1,9 @@
-import type Order from "../../domain/order.ts"
-import type OrderItem from "../../domain/orderItem.ts"
-import type OrderSyntax from "../../domain/orderSyntax.ts"
-import type OrderSyntaxBlock from "../../domain/orderSyntaxBlock.ts"
-import type ProductRulesPort from "../../ports/productRules.ts"
-import BaseUsecase from "../baseUsecase.ts"
+import type Order from "../../../domain/order.ts"
+import type OrderItem from "../../../domain/orderItem.ts"
+import type OrderSyntax from "../../../domain/orderSyntax.ts"
+import type OrderSyntaxBlock from "../../../domain/orderSyntaxBlock.ts"
+import type ProductRulesPort from "../../../ports/productRules.ts"
+import BaseUsecase from "../../baseUsecase.ts"
 
 interface deps {
     productRules: ProductRulesPort
