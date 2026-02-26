@@ -34,7 +34,7 @@ export default class ParseSemantic implements BaseUsecase<Order> {
             }
 
             currentBlock.quantities.forEach((quantity, index) => {
-                currentBlock.quantities[index] = quantity || 1
+                currentBlock.quantities[index] = quantity
             })
 
             if (rules.multiplicator) {
@@ -52,10 +52,9 @@ export default class ParseSemantic implements BaseUsecase<Order> {
             if (
                 currentBlock.quantities.length === 2
             ) {
-                if (currentBlock.quantities[0] === currentBlock.quantities[1]) {
-                    const alternate = rules.alternate
-
-                    let alternateIndex = rules.alternate.findIndex(a => {
+                const alternate = rules.alternate
+                if (currentBlock.quantities[0] === currentBlock.quantities[1] && alternate) {
+                    let alternateIndex = alternate.findIndex(a => {
                         a === currentBlock.features[0]
                     })
                     if (alternateIndex < 0) {
@@ -73,7 +72,7 @@ export default class ParseSemantic implements BaseUsecase<Order> {
                     output.push({
                         quantity: currentBlock.quantities.reduce((a, b) => a + b),
                         product: currentBlock.product,
-                        feature: currentBlock.features[0] || rules.default
+                        feature: currentBlock.features[0]
                     })
                 }
 
@@ -81,9 +80,9 @@ export default class ParseSemantic implements BaseUsecase<Order> {
             }
 
             if (currentBlock.features.length > 1) {
-                const quantity = currentBlock.quantities[0] / currentBlock.features.length
+                const quantity = currentBlock.quantities[0] / (currentBlock.features.length)
 
-                if (quantity % rules.quantityStep === 0) {
+                if (!rules.quantityStep || quantity % rules.quantityStep === 0) {
                     currentBlock.features.forEach(feature => {
                         output.push({
                             quantity,
@@ -99,7 +98,7 @@ export default class ParseSemantic implements BaseUsecase<Order> {
             output.push({
                 quantity: currentBlock.quantities[0],
                 product: currentBlock.product,
-                feature: currentBlock.features[0] || rules.default
+                feature: currentBlock.features[0]
             })
         }
 

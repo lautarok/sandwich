@@ -1,5 +1,5 @@
 export default interface ProductRule {
-    default: string,
+    default?: string,
     multiplicator?: number,
     quantityStep?: number,
     features?: string[]
