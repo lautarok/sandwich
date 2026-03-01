@@ -1,0 +1,33 @@
+services:
+  mysql:
+    image: mysql
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    environment:
+      MYSQL_ROOT_PASSWORD: default
+      MYSQL_DATABASE: sandwich
+    volumes:
+      - mysql-db:/var/lib/mysql
+
+  backend:
+    build: .
+    working_dir: /app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - ./:/app
+    command: npm run migrations:up
+    environment:
+      HTTP_PORT: 3000
+      MYSQL_URI: mysql://root:default@mysql:3306/sandwich
+      CONFIG_FOLDER: gm-publicidad
+    ports:
+      - "3000:3000"
+
+volumes:
+  mysql-db:

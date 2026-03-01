@@ -6,8 +6,11 @@
   "scripts": {
     "test": "node --test \"src/**/*.spec.ts\"",
     "coverage": "node --experimental-test-coverage --test-coverage-exclude=\"src/config/**\" --test \"src/**/*.spec.ts\"",
-    "start": "node --env-file-if-exists=.env src/index.ts",
-    "dev": "node --watch-path=config --watch-path=src --env-file=.env.development --watch src/index.ts"
+    "start": "node --env-file-if-exists=.env src/cmd/sandwich/index.ts",
+    "dev": "node --watch-path=config --watch-path=src --env-file=.env.development --watch src/cmd/sandwich/index.ts",
+    "migrations:generate": "node --env-file-if-exists=.env.development --env-file-if-exists=.env src/cmd/migrations/generate.ts --",
+    "migrations:up": "node --env-file-if-exists=.env.development --env-file-if-exists=.env src/cmd/migrations/up.ts --",
+    "migrations:rollback": "node --env-file-if-exists=.env.development --env-file-if-exists=.env src/cmd/migrations/rollback.ts --"
   },
   "keywords": [],
   "author": "",

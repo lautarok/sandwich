@@ -1,6 +1,6 @@
 import { describe, it } from "node:test"
 import ParseSemantic from "./parseSemantic.ts"
-import ProductRules from "../../../adapters/productRules/outbound/productRules.ts"
+import ProductRules from "../../../../adapters/productRules/outbound/productRules.ts"
 import { partialDeepStrictEqual } from "node:assert/strict"
 
 describe("parse semantic usecase", () => {

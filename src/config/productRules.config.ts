@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises"
 import path from "path"
-import type ProductRule from "../domain/productRule.ts"
+import type ProductRule from "../domain/parser/productRule.ts"
 
 export default async function loadProductRules(): Promise<Record<string, ProductRule>> {
     const dictionary = await readFile(

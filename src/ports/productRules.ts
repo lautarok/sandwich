@@ -1,4 +1,4 @@
-import type ProductRule from "../domain/productRule.ts";
+import type ProductRule from "../domain/parser/productRule.ts";
 
 export default interface ProductRulesPort {
     getProductRules(product: string): ProductRule | null

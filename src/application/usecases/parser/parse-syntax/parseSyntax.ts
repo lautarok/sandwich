@@ -1,6 +1,6 @@
-import type OrderSyntax from "../../../domain/orderSyntax.ts"
-import type Token from "../../../domain/token.ts"
-import BaseUsecase from "../../baseUsecase.ts"
+import type OrderSyntax from "../../../../domain/parser/orderSyntax.ts"
+import type Token from "../../../../domain/parser/token.ts"
+import BaseUsecase from "../../../base/baseUsecase.ts"
 
 export default class ParseSyntax implements BaseUsecase<OrderSyntax> {
     private createOrderBlock(tokenGroup: Token[]) {

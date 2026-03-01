@@ -1,5 +1,5 @@
 import type DictionaryPort from "../../../ports/dictionary.ts"
-import type DictionaryType from "../../../domain/dictionary.ts"
+import type DictionaryType from "../../../domain/parser/dictionary.ts"
 
 export default class Dictionary implements DictionaryPort {
     private dictionary: DictionaryType

@@ -1,9 +1,9 @@
 import express from "express"
 import ParseMessageController from "./controllers/parse-message.controller.ts"
-import ParseLexer from "../../../usecases/parser/parse-lexer/parseLexer.ts"
-import ParseSyntax from "../../../usecases/parser/parse-syntax/parseSyntax.ts"
+import ParseLexer from "../../../application/usecases/parser/parse-lexer/parseLexer.ts"
+import ParseSyntax from "../../../application/usecases/parser/parse-syntax/parseSyntax.ts"
 import HasMessageMiddleware from "./middlewares/has-message.middleware.ts"
-import ParseSemantic from "../../../usecases/parser/parse-semantic/parseSemantic.ts"
+import ParseSemantic from "../../../application/usecases/parser/parse-semantic/parseSemantic.ts"
 
 interface deps {
     parseLexer: ParseLexer

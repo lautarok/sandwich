@@ -1,5 +1,5 @@
 import type ProductRulesPort from "../../../ports/productRules.ts"
-import type ProductRuleType from "../../../domain/productRule.ts"
+import type ProductRuleType from "../../../domain/parser/productRule.ts"
 
 export default class ProductRules implements ProductRulesPort {
     rules: Record<string, ProductRuleType>

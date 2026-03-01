@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises"
 import path from "path"
-import type Dictionary from "../domain/dictionary.ts"
+import type Dictionary from "../domain/parser/dictionary.ts"
 
 export default async function loadDictionary(): Promise<Dictionary> {
     const dictionary = await readFile(

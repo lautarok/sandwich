@@ -1,9 +1,9 @@
-import type Order from "../../../domain/order.ts"
-import type OrderItem from "../../../domain/orderItem.ts"
-import type OrderSyntax from "../../../domain/orderSyntax.ts"
-import type OrderSyntaxBlock from "../../../domain/orderSyntaxBlock.ts"
-import type ProductRulesPort from "../../../ports/productRules.ts"
-import BaseUsecase from "../../baseUsecase.ts"
+import type Order from "../../../../domain/parser/order.ts"
+import type OrderItem from "../../../../domain/parser/orderItem.ts"
+import type OrderSyntax from "../../../../domain/parser/orderSyntax.ts"
+import type OrderSyntaxBlock from "../../../../domain/parser/orderSyntaxBlock.ts"
+import type ProductRulesPort from "../../../../ports/productRules.ts"
+import BaseUsecase from "../../../base/baseUsecase.ts"
 
 interface deps {
     productRules: ProductRulesPort
@@ -118,10 +118,7 @@ export default class ParseSemantic implements BaseUsecase<Order> {
     }
 
     execute(syntax: OrderSyntax) {
-        const date = new Date()
         return {
-            date,
-            customer: "Mayra centro",
             items: this.blockToItems(syntax.blocks)
         }
     }
