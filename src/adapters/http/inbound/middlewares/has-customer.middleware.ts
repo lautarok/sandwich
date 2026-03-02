@@ -3,7 +3,7 @@ import BaseMiddleware from "../base/middleware.base.ts"
 import InvalidInputError from "../../../../errors/invalidInput.error.ts"
 
 export default class HasCustomerMiddleware implements BaseMiddleware {
-    middleware = (req: Request, res: Response, next: NextFunction) => {
+    middleware = (req: Request, _: Response, next: NextFunction) => {
         if (!req.body) {
             throw new InvalidInputError("wrong body")
         }

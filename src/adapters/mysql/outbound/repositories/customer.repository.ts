@@ -21,8 +21,8 @@ export default class CustomerRepository implements BaseRepository<Customer> {
         const [rows] = await pool.execute<Customer[] & mysql2.QueryResult>(`
             SELECT * FROM customers
             ORDER BY id DESC
-            SKIP ${(dto.page - 1) * dto.limit}
             LIMIT ${dto.limit}
+            OFFSET ${(dto.page - 1) * dto.limit}
         `)
         
         return rows

@@ -6,12 +6,14 @@ import GlobalErrorsMiddleware from "./middlewares/global-errors.middleware.ts"
 import CorsMiddleware from "./middlewares/cors.middleware.ts"
 import ParseSemantic from "../../../application/usecases/parser/parse-semantic/parseSemantic.ts"
 import { CreateCustomer } from "../../../application/usecases/customers/create-customer/createCustomer.ts"
+import GetCustomerList from "../../../application/usecases/customers/get-customer-list/getCustomerList.ts"
 
 interface deps {
     parseLexer: ParseLexer
     parseSyntax: ParseSyntax
     parseSemantic: ParseSemantic
     createCustomer: CreateCustomer
+    getCustomerList: GetCustomerList
 }
 
 export default class ExpressAdapter {
@@ -19,12 +21,14 @@ export default class ExpressAdapter {
     private parseSyntax: ParseSyntax
     private parseSemantic: ParseSemantic
     private createCustomer: CreateCustomer
+    private getCustomerList: GetCustomerList
 
     constructor(deps: deps) {
         this.parseLexer = deps.parseLexer
         this.parseSyntax = deps.parseSyntax
         this.parseSemantic = deps.parseSemantic
         this.createCustomer = deps.createCustomer
+        this.getCustomerList = deps.getCustomerList
     }
 
     run(port: number | string): Promise<void> {
@@ -40,7 +44,8 @@ export default class ExpressAdapter {
                 parseLexer: this.parseLexer,
                 parseSyntax: this.parseSyntax,
                 parseSemantic: this.parseSemantic,
-                createCustomer: this.createCustomer
+                createCustomer: this.createCustomer,
+                getCustomerList: this.getCustomerList
             }))
 
             const globalErrorsMiddleware = new GlobalErrorsMiddleware

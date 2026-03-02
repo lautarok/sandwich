@@ -10,6 +10,7 @@ import loadProductRules from "../../config/productRules.config.ts"
 import { CreateCustomer } from "../../application/usecases/customers/create-customer/createCustomer.ts"
 import CustomerRepository from "../../adapters/mysql/outbound/repositories/customer.repository.ts"
 import MysqlAdapter from "../../adapters/mysql/mysql.ts"
+import GetCustomerList from "../../application/usecases/customers/get-customer-list/getCustomerList.ts"
 
 const dictionaryConfig = await loadDictionary(),
     productRulesConfig = await loadProductRules()
@@ -37,11 +38,16 @@ const createCustomer = new CreateCustomer({
     customerRepository
 })
 
+const getCustomerList = new GetCustomerList({
+    customerRepository
+})
+
 const expressAdapter = new ExpressAdapter({
     parseLexer,
     parseSyntax,
     parseSemantic,
-    createCustomer
+    createCustomer,
+    getCustomerList
 })
 
 // new BaileysAdapter({

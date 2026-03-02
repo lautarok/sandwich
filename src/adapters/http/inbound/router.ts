@@ -7,17 +7,21 @@ import ParseSemantic from "../../../application/usecases/parser/parse-semantic/p
 import HasCustomerMiddleware from "./middlewares/has-customer.middleware.ts"
 import CustomerController from "./controllers/customer.controller.ts"
 import { CreateCustomer } from "../../../application/usecases/customers/create-customer/createCustomer.ts"
+import PaginationMiddleware from "./middlewares/pagination.middleware.ts"
+import GetCustomerList from "../../../application/usecases/customers/get-customer-list/getCustomerList.ts"
 
 interface deps {
     parseLexer: ParseLexer
     parseSyntax: ParseSyntax
     parseSemantic: ParseSemantic
     createCustomer: CreateCustomer
+    getCustomerList: GetCustomerList
 }
 
 export default function router(deps: deps) {
     const hasMessageMiddleware = new HasMessageMiddleware,
-        hasCustomerMiddleware = new HasCustomerMiddleware
+        hasCustomerMiddleware = new HasCustomerMiddleware,
+        paginationMiddleware = new PaginationMiddleware
 
     const parseMessageController = new ParseMessageController({
         parseLexer: deps.parseLexer,
@@ -26,7 +30,8 @@ export default function router(deps: deps) {
     })
 
     const customerController = new CustomerController({
-        createCustomer: deps.createCustomer
+        createCustomer: deps.createCustomer,
+        getCustomerList: deps.getCustomerList
     })
 
     const routerGroup = express.Router()
@@ -41,6 +46,12 @@ export default function router(deps: deps) {
         "/customer",
         hasCustomerMiddleware.middleware,
         customerController.post
+    )
+
+    routerGroup.get(
+        "/customer",
+        paginationMiddleware.middleware,
+        customerController.get
     )
 
     return routerGroup
