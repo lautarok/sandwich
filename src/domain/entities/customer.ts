@@ -1,4 +1,4 @@
-import customerContact from "./customerContact.ts"
+import type customerContact from "./customerContact.ts"
 
 export default interface Customer {
     id: number

@@ -10,12 +10,13 @@ interface deps {
     parseSemantic: ParseSemantic
 }
 
-export default class ParseMessageController implements BaseController {
+export default class ParseMessageController extends BaseController {
     private parseLexer: ParseLexer
     private parseSyntax: ParseSyntax
     private parseSemantic: ParseSemantic
 
     constructor(deps: deps) {
+        super()
         this.parseLexer = deps.parseLexer
         this.parseSyntax = deps.parseSyntax
         this.parseSemantic = deps.parseSemantic

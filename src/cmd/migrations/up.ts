@@ -13,7 +13,7 @@ const sqlFiles = await fs.readdir(SQL_FILES_DIR)
 await mysqlAdapter.runInTransaction(async pool => {
     await pool.execute(`
         CREATE TABLE IF NOT EXISTS migrations (
-            id BIGINT PRIMARY KEY AUTO_INCREMENT
+            id BIGINT PRIMARY KEY AUTO_INCREMENT,
             file_name VARCHAR(100)
         );
     `)

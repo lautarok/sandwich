@@ -1,14 +1,33 @@
-import Customer from "../../../../domain/entities/customer.ts"
+import type Customer from "../../../../domain/entities/customer.ts"
 import BaseUsecase from "../../../base/baseUsecase.ts"
 
-interface deps {}
+interface CustomerRepository {
+    createOne({name, surname}: {
+        name: string,
+        surname?: string
+    }): Promise<Customer>
+}
+
+interface deps {
+    customerRepository: CustomerRepository
+}
 
 export class CreateCustomer implements BaseUsecase<Customer> {
-    constructor(deps: deps) {
+    customerRepository: CustomerRepository
 
+    constructor(deps: deps) {
+        this.customerRepository = deps.customerRepository
     }
 
-    async execute(customer: Customer) {
-        
+    async execute({
+        name,
+        surname
+    }: {
+        name: string,
+        surname?: string
+    }) {
+        return await this.customerRepository.createOne({
+            name, surname
+        })
     }
 }

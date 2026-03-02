@@ -1,7 +1,7 @@
 import mysql2 from "mysql2/promise"
-import PaginationInput from "../../../../application/dtos/pagination.input.ts"
-import Order from "../../../../domain/entities/order.ts"
-import BaseRepository from "../base/repository.base.ts"
+import type PaginationInput from "../../../../application/dtos/pagination.input.ts"
+import type Order from "../../../../domain/entities/order.ts"
+import type BaseRepository from "../base/repository.base.ts"
 import MysqlAdapter from "../../mysql.ts"
 
 interface deps {

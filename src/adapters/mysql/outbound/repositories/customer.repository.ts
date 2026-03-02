@@ -1,7 +1,7 @@
 import mysql2 from "mysql2/promise"
-import PaginationInput from "../../../../application/dtos/pagination.input.ts"
-import Customer from "../../../../domain/entities/customer.ts"
-import BaseRepository from "../base/repository.base.ts"
+import type PaginationInput from "../../../../application/dtos/pagination.input.ts"
+import type Customer from "../../../../domain/entities/customer.ts"
+import type BaseRepository from "../base/repository.base.ts"
 import MysqlAdapter from "../../mysql.ts"
 
 interface deps {
@@ -33,12 +33,12 @@ export default class CustomerRepository implements BaseRepository<Customer> {
         
         const [result] = await pool.execute<mysql2.ResultSetHeader>(`
             INSERT INTO customers (name, surname)
-            VALUES ('${model.name}', '${model.surname}')
+            VALUES ('${model.name}', ${model.surname ? `'${model.surname}'` : "NULL"})
         `)
         
         const [rows] = await pool.execute<Customer[] & mysql2.QueryResult>(`
             SELECT *
-            FROM orders
+            FROM customers
             WHERE id = ${result.insertId}
         `)
 

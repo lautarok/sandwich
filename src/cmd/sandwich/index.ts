@@ -7,12 +7,21 @@ import ParseSemantic from "../../application/usecases/parser/parse-semantic/pars
 import ParseSyntax from "../../application/usecases/parser/parse-syntax/parseSyntax.ts"
 import loadDictionary from "../../config/dictionary.config.ts"
 import loadProductRules from "../../config/productRules.config.ts"
+import { CreateCustomer } from "../../application/usecases/customers/create-customer/createCustomer.ts"
+import CustomerRepository from "../../adapters/mysql/outbound/repositories/customer.repository.ts"
+import MysqlAdapter from "../../adapters/mysql/mysql.ts"
 
 const dictionaryConfig = await loadDictionary(),
     productRulesConfig = await loadProductRules()
 
 const dictionary = new Dictionary(dictionaryConfig),
     productRules = new ProductRules(productRulesConfig)
+
+const mysqlAdapter = new MysqlAdapter
+
+const customerRepository = new CustomerRepository({
+    adapter: mysqlAdapter
+})
 
 const parseLexer = new ParseLexer({
     dictionary
@@ -24,8 +33,15 @@ const parseSemantic = new ParseSemantic({
     productRules
 })
 
+const createCustomer = new CreateCustomer({
+    customerRepository
+})
+
 const expressAdapter = new ExpressAdapter({
-    parseLexer, parseSyntax, parseSemantic
+    parseLexer,
+    parseSyntax,
+    parseSemantic,
+    createCustomer
 })
 
 // new BaileysAdapter({

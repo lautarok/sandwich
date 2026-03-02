@@ -1,0 +1,8 @@
+CREATE TABLE customer_contacts (
+    `id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+    `type` ENUM('whatsapp', 'instagram', 'facebook') NOT NULL,
+    `value` VARCHAR(255) NOT NULL,
+    `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP
+);

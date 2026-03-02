@@ -21,7 +21,7 @@ services:
         condition: service_healthy
     volumes:
       - ./:/app
-    command: npm run migrations:up
+    command: npm run dev
     environment:
       HTTP_PORT: 3000
       MYSQL_URI: mysql://root:default@mysql:3306/sandwich

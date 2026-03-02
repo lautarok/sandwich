@@ -2,7 +2,7 @@ import type Order from "../../../../domain/parser/order.ts"
 import type OrderItem from "../../../../domain/parser/orderItem.ts"
 import type OrderSyntax from "../../../../domain/parser/orderSyntax.ts"
 import type OrderSyntaxBlock from "../../../../domain/parser/orderSyntaxBlock.ts"
-import type ProductRulesPort from "../../../../ports/productRules.ts"
+import type ProductRulesPort from "../../../../ports/productRules.port.ts"
 import BaseUsecase from "../../../base/baseUsecase.ts"
 
 interface deps {
