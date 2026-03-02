@@ -7,6 +7,8 @@ import CorsMiddleware from "./middlewares/cors.middleware.ts"
 import ParseSemantic from "../../../application/usecases/parser/parse-semantic/parseSemantic.ts"
 import { CreateCustomer } from "../../../application/usecases/customers/create-customer/createCustomer.ts"
 import GetCustomerList from "../../../application/usecases/customers/get-customer-list/getCustomerList.ts"
+import CreateCustomerContact from "../../../application/usecases/customer-contacts/create-customer-contact/createCustomerContact.ts"
+import GetCustomerContactList from "../../../application/usecases/customer-contacts/get-customer-contact-list/getCustomerContactList.ts"
 
 interface deps {
     parseLexer: ParseLexer
@@ -14,6 +16,8 @@ interface deps {
     parseSemantic: ParseSemantic
     createCustomer: CreateCustomer
     getCustomerList: GetCustomerList
+    createCustomerContact: CreateCustomerContact
+    getCustomerContactList: GetCustomerContactList
 }
 
 export default class ExpressAdapter {
@@ -22,6 +26,8 @@ export default class ExpressAdapter {
     private parseSemantic: ParseSemantic
     private createCustomer: CreateCustomer
     private getCustomerList: GetCustomerList
+    private createCustomerContact: CreateCustomerContact
+    private getCustomerContactList: GetCustomerContactList
 
     constructor(deps: deps) {
         this.parseLexer = deps.parseLexer
@@ -29,6 +35,8 @@ export default class ExpressAdapter {
         this.parseSemantic = deps.parseSemantic
         this.createCustomer = deps.createCustomer
         this.getCustomerList = deps.getCustomerList
+        this.createCustomerContact = deps.createCustomerContact
+        this.getCustomerContactList = deps.getCustomerContactList
     }
 
     run(port: number | string): Promise<void> {
@@ -45,7 +53,9 @@ export default class ExpressAdapter {
                 parseSyntax: this.parseSyntax,
                 parseSemantic: this.parseSemantic,
                 createCustomer: this.createCustomer,
-                getCustomerList: this.getCustomerList
+                getCustomerList: this.getCustomerList,
+                createCustomerContact: this.createCustomerContact,
+                getCustomerContactList: this.getCustomerContactList
             }))
 
             const globalErrorsMiddleware = new GlobalErrorsMiddleware

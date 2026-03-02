@@ -11,6 +11,9 @@ import { CreateCustomer } from "../../application/usecases/customers/create-cust
 import CustomerRepository from "../../adapters/mysql/outbound/repositories/customer.repository.ts"
 import MysqlAdapter from "../../adapters/mysql/mysql.ts"
 import GetCustomerList from "../../application/usecases/customers/get-customer-list/getCustomerList.ts"
+import CustomerContactRepository from "../../adapters/mysql/outbound/repositories/customerContact.repository.ts"
+import CreateCustomerContact from "../../application/usecases/customer-contacts/create-customer-contact/createCustomerContact.ts"
+import GetCustomerContactList from "../../application/usecases/customer-contacts/get-customer-contact-list/getCustomerContactList.ts"
 
 const dictionaryConfig = await loadDictionary(),
     productRulesConfig = await loadProductRules()
@@ -21,6 +24,10 @@ const dictionary = new Dictionary(dictionaryConfig),
 const mysqlAdapter = new MysqlAdapter
 
 const customerRepository = new CustomerRepository({
+    adapter: mysqlAdapter
+})
+
+const customerContactRepository = new CustomerContactRepository({
     adapter: mysqlAdapter
 })
 
@@ -42,12 +49,22 @@ const getCustomerList = new GetCustomerList({
     customerRepository
 })
 
+const createCustomerContact = new CreateCustomerContact({
+    customerContactRepository
+})
+
+const getCustomerContactList = new GetCustomerContactList({
+    customerContactRepository
+})
+
 const expressAdapter = new ExpressAdapter({
     parseLexer,
     parseSyntax,
     parseSemantic,
     createCustomer,
-    getCustomerList
+    getCustomerList,
+    createCustomerContact,
+    getCustomerContactList
 })
 
 // new BaileysAdapter({

@@ -29,7 +29,7 @@ await mysqlAdapter.runInTransaction(async pool => {
         `)
 
         if (rows.length > 0) {
-            return
+            continue
         }
 
         const fileContent = (await fs.readFile(

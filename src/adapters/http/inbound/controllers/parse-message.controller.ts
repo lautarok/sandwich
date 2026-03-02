@@ -26,9 +26,7 @@ export default class ParseMessageController extends BaseController {
         const message = req.query["message"] as string
 
         const lexerResult = this.parseLexer.execute(message),
-
             syntaxResult = this.parseSyntax.execute(lexerResult),
-
             semanticResult = this.parseSemantic.execute(syntaxResult)
 
         res.status(200).json({

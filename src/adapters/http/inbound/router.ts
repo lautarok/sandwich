@@ -9,6 +9,10 @@ import CustomerController from "./controllers/customer.controller.ts"
 import { CreateCustomer } from "../../../application/usecases/customers/create-customer/createCustomer.ts"
 import PaginationMiddleware from "./middlewares/pagination.middleware.ts"
 import GetCustomerList from "../../../application/usecases/customers/get-customer-list/getCustomerList.ts"
+import CreateCustomerContact from "../../../application/usecases/customer-contacts/create-customer-contact/createCustomerContact.ts"
+import GetCustomerContactList from "../../../application/usecases/customer-contacts/get-customer-contact-list/getCustomerContactList.ts"
+import HasCustomerContactMiddleware from "./middlewares/has-customer-contact.middleware.ts"
+import CustomerContactController from "./controllers/customer-contact.controller.ts"
 
 interface deps {
     parseLexer: ParseLexer
@@ -16,12 +20,15 @@ interface deps {
     parseSemantic: ParseSemantic
     createCustomer: CreateCustomer
     getCustomerList: GetCustomerList
+    createCustomerContact: CreateCustomerContact
+    getCustomerContactList: GetCustomerContactList
 }
 
 export default function router(deps: deps) {
-    const hasMessageMiddleware = new HasMessageMiddleware,
+    const paginationMiddleware = new PaginationMiddleware,
+        hasMessageMiddleware = new HasMessageMiddleware,
         hasCustomerMiddleware = new HasCustomerMiddleware,
-        paginationMiddleware = new PaginationMiddleware
+        hasCustomerContactMiddleware = new HasCustomerContactMiddleware
 
     const parseMessageController = new ParseMessageController({
         parseLexer: deps.parseLexer,
@@ -32,6 +39,11 @@ export default function router(deps: deps) {
     const customerController = new CustomerController({
         createCustomer: deps.createCustomer,
         getCustomerList: deps.getCustomerList
+    })
+
+    const customerContactController = new CustomerContactController({
+        createCustomerContact: deps.createCustomerContact,
+        getCustomerContactList: deps.getCustomerContactList
     })
 
     const routerGroup = express.Router()
@@ -52,6 +64,18 @@ export default function router(deps: deps) {
         "/customer",
         paginationMiddleware.middleware,
         customerController.get
+    )
+
+    routerGroup.post(
+        "/customer-contact",
+        hasCustomerContactMiddleware.middleware,
+        customerContactController.post
+    )
+
+    routerGroup.get(
+        "/customer-contact",
+        paginationMiddleware.middleware,
+        customerContactController.get
     )
 
     return routerGroup

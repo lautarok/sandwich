@@ -1,10 +1,10 @@
-import type customerContact from "./customerContact.ts"
+import type CustomerContact from "./customerContact.ts"
 
 export default interface Customer {
     id: number
     name: string
     surname?: string
-    contacts: customerContact[]
+    contacts: CustomerContact[]
     createdAt: Date
     updatedAt: Date
 }
