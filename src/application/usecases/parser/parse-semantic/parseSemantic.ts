@@ -21,7 +21,13 @@ export default class ParseSemantic implements BaseUsecase {
 
             if (!rules) continue
 
-            if (!rules.features?.map(f => f.name).includes(currentBlock.features[0])) {
+            if (
+                !rules.features?.map(f => f.name).includes(currentBlock.features[0])
+                || (
+                    rules.default
+                    && currentBlock.features.length === 0
+                )
+            ) {
                 currentBlock.features = [rules.default]
             }
 
