@@ -19,20 +19,22 @@ export default class CustomerRepository extends BaseRepository<Customer> {
             SELECT
                 customers.*,
                 IFNULL(
-                    JSON_ARRAYAGG(
-                        JSON_OBJECT(
-                            'id', customer_contacts.id,
-                            'type', customer_contacts.type,
-                            'value', customer_contacts.value,
-                            'created_at', customer_contacts.created_at,
-                            'updated_at', customer_contacts.updated_at
+                    (
+                        SELECT JSON_ARRAYAGG(
+                            JSON_OBJECT(
+                                'id', customer_contacts.id,
+                                'type', customer_contacts.type,
+                                'value', customer_contacts.value,
+                                'created_at', customer_contacts.created_at,
+                                'updated_at', customer_contacts.updated_at
+                            )
                         )
+                        FROM customer_contacts
+                        WHERE customer_contacts.customer_id = customers.id
                     ),
                     JSON_ARRAY()
                 ) AS contacts
             FROM customers
-            LEFT JOIN customer_contacts
-                ON customer_contacts.customer_id = customers.id
             GROUP BY customers.id
             ORDER BY customers.id DESC
             LIMIT ${dto.limit}
