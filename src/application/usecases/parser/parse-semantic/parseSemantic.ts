@@ -62,7 +62,7 @@ export default class ParseSemantic implements BaseUsecase {
                             quantity,
                             product: currentBlock.product,
                             feature: alternate[(alternateIndex + index) % alternate.length],
-                            price: rules.price * quantity
+                            price: (rules.price / rules.multiplicator) * quantity
                         })
                     })
                 } else {
@@ -72,7 +72,7 @@ export default class ParseSemantic implements BaseUsecase {
                         quantity,
                         product: currentBlock.product,
                         feature: currentBlock.features[0],
-                        price: rules.price * quantity
+                        price: (rules.price / rules.multiplicator) * quantity
                     })
                 }
 
@@ -88,7 +88,7 @@ export default class ParseSemantic implements BaseUsecase {
                             quantity,
                             feature,
                             product: currentBlock.product,
-                            price: rules.price * quantity
+                            price: (rules.price / rules.multiplicator) * quantity
                         })
                     })
                 }
@@ -100,7 +100,7 @@ export default class ParseSemantic implements BaseUsecase {
                 quantity: currentBlock.quantities[0],
                 product: currentBlock.product,
                 feature: currentBlock.features[0],
-                price: rules.price * currentBlock.quantities[0]
+                price: (rules.price / rules.multiplicator) * currentBlock.quantities[0]
             })
         }
 

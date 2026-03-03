@@ -12,15 +12,15 @@ export default class ProductRules implements ProductRulesPort {
         const matchRules = {...this.rules[product]}
         if (!matchRules) return null
 
+        if (matchRules.price === undefined) {
+            matchRules.price = 0
+        }
+
         features?.forEach(feature => {
             const matchFeature = matchRules.features.find(f => f.name === feature)
 
             if (!matchFeature || !matchFeature.addPrice) {
                 return
-            }
-
-            if (!matchRules.price) {
-                matchRules.price = 9999
             }
 
             matchRules.price += matchFeature.addPrice
