@@ -116,7 +116,7 @@ export default class ParseSemantic implements BaseUsecase {
             }
 
             return acc
-        }, [])
+        }, []).filter(item => item.product && item.quantity && item.price)
     }
 
     execute(syntax: OrderSyntax) {
