@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node --test \"src/**/*.spec.ts\"",
-    "coverage": "node --experimental-test-coverage --test-coverage-exclude=\"src/config/**\" --test \"src/**/*.spec.ts\"",
-    "start": "node --env-file-if-exists=.env src/cmd/sandwich/index.ts",
-    "dev": "node --watch-path=config --watch-path=src --env-file=.env.development --watch src/cmd/sandwich/index.ts",
-    "migrations:generate": "node --env-file-if-exists=.env.development --env-file-if-exists=.env src/cmd/migrations/generate.ts --",
-    "migrations:up": "node --env-file-if-exists=.env.development --env-file-if-exists=.env src/cmd/migrations/up.ts --",
-    "migrations:rollback": "node --env-file-if-exists=.env.development --env-file-if-exists=.env src/cmd/migrations/rollback.ts --"
+    "test": "tsx --test \"src/**/*.spec.ts\"",
+    "coverage": "NODE_V8_COVERAGE=coverage tsx --test \"src/**/*.spec.ts\"",
+    "start": "tsx --env-file=.env src/cmd/sandwich/index.ts",
+    "dev": "tsx watch --env-file=.env.development src/cmd/sandwich/index.ts",
+    "migrations:generate": "tsx --env-file=.env.development src/cmd/migrations/generate.ts --",
+    "migrations:up": "tsx --env-file=.env.development src/cmd/migrations/up.ts --",
+    "migrations:rollback": "tsx --env-file=.env.development src/cmd/migrations/rollback.ts --"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@types/express": "^5.0.6",
     "@types/node": "^25.3.0",
-    "@types/qrcode-terminal": "^0.12.2"
+    "@types/qrcode-terminal": "^0.12.2",
+    "tsx": "^4.21.0"
   }
 }

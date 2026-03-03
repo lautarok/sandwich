@@ -5,16 +5,10 @@ interface CustomerContactRepository {
     createOne(customerContact: CustomerContact): Promise<CustomerContact>
 }
 
-interface deps {
-    customerContactRepository: CustomerContactRepository
-}
-
-export default class CreateCustomerContact implements BaseUsecase<CustomerContact> {
-    customerContactRepository: CustomerContactRepository
-
-    constructor(deps: deps) {
-        this.customerContactRepository = deps.customerContactRepository
-    }
+export default class CreateCustomerContact implements BaseUsecase {
+    constructor(
+        private readonly customerContactRepository: CustomerContactRepository
+    ) {}
 
     execute(data: {
         customerId: number

@@ -1,7 +1,8 @@
 export default interface OrderItem {
     id: number
     name: string
-    feature: string
-    createdAt: Date
+    features: string
+    price: number
+    quantity: number
     updatedAt: Date
 }

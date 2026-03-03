@@ -3,27 +3,23 @@ import GetCustomerContactList from "../../../../application/usecases/customer-co
 import BaseController from "../base/controller.base.ts"
 import { type Request, type Response } from "express"
 
-interface deps {
-    createCustomerContact: CreateCustomerContact
-    getCustomerContactList: GetCustomerContactList
-}
-
 export default class CustomerContactController extends BaseController {
-    private readonly createCustomerContact: CreateCustomerContact
-    private readonly getCustomerContactList: GetCustomerContactList
-
-    constructor(deps: deps) {
+    constructor(
+        private readonly createCustomerContact: CreateCustomerContact,
+        private readonly getCustomerContactList: GetCustomerContactList
+    ) {
         super()
-        this.createCustomerContact = deps.createCustomerContact
-        this.getCustomerContactList = deps.getCustomerContactList
     }
 
     get = async (req: Request, res: Response) => {
         const pagination = res.locals.pagination
 
-        const result = await this.getCustomerContactList.execute(pagination)
+        const {count, list} = await this.getCustomerContactList.execute(pagination)
 
-        res.status(200).json(result)
+        res.status(200).json({
+            count,
+            list
+        })
     }
 
     post = async (req: Request, res: Response) =>  {

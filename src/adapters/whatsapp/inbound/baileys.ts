@@ -9,21 +9,12 @@ import ParseLexer from "../../../application/usecases/parser/parse-lexer/parseLe
 import ParseSyntax from "../../../application/usecases/parser/parse-syntax/parseSyntax.ts"
 import ParseSemantic from "../../../application/usecases/parser/parse-semantic/parseSemantic.ts"
 
-interface deps {
-    parseLexer: ParseLexer
-    parseSyntax: ParseSyntax
-    parseSemantic: ParseSemantic
-}
-
 export default class BaileysAdapter {
-    parseLexer: ParseLexer
-    parseSyntax: ParseSyntax
-    parseSemantic: ParseSemantic
-
-    constructor(deps: deps) {
-        this.parseLexer = deps.parseLexer
-        this.parseSyntax = deps.parseSyntax
-        this.parseSemantic = deps.parseSemantic
+    constructor(
+        private readonly parseLexer: ParseLexer,
+        private readonly parseSyntax: ParseSyntax,
+        private readonly parseSemantic: ParseSemantic
+    ) {
         this.initialize()
     }
 

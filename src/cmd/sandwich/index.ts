@@ -1,5 +1,4 @@
 import ExpressAdapter from "../../adapters/http/inbound/express.ts"
-import BaileysAdapter from "../../adapters/whatsapp/inbound/baileys.ts"
 import Dictionary from "../../adapters/dictionary/outbound/dictionary.ts"
 import ProductRules from "../../adapters/productRules/outbound/productRules.ts"
 import ParseLexer from "../../application/usecases/parser/parse-lexer/parseLexer.ts"
@@ -14,6 +13,10 @@ import GetCustomerList from "../../application/usecases/customers/get-customer-l
 import CustomerContactRepository from "../../adapters/mysql/outbound/repositories/customerContact.repository.ts"
 import CreateCustomerContact from "../../application/usecases/customer-contacts/create-customer-contact/createCustomerContact.ts"
 import GetCustomerContactList from "../../application/usecases/customer-contacts/get-customer-contact-list/getCustomerContactList.ts"
+import CreateOrder from "../../application/usecases/orders/create-order/createOrder.ts"
+import OrderRepository from "../../adapters/mysql/outbound/repositories/order.repository.ts"
+import OrderItemRepository from "../../adapters/mysql/outbound/repositories/orderItem.repository.ts"
+import GetOrderList from "../../application/usecases/orders/get-order-list/getOrderList.ts"
 
 const dictionaryConfig = await loadDictionary(),
     productRulesConfig = await loadProductRules()
@@ -23,53 +26,39 @@ const dictionary = new Dictionary(dictionaryConfig),
 
 const mysqlAdapter = new MysqlAdapter
 
-const customerRepository = new CustomerRepository({
-    adapter: mysqlAdapter
-})
+const customerRepository = new CustomerRepository(mysqlAdapter),
+    customerContactRepository = new CustomerContactRepository(mysqlAdapter),
+    orderRepository = new OrderRepository(mysqlAdapter),
+    orderItemRepository = new OrderItemRepository(mysqlAdapter)
 
-const customerContactRepository = new CustomerContactRepository({
-    adapter: mysqlAdapter
-})
+const parseLexer = new ParseLexer(dictionary),
+    parseSyntax = new ParseSyntax,
+    parseSemantic = new ParseSemantic(productRules),
 
-const parseLexer = new ParseLexer({
-    dictionary
-})
+    createCustomer = new CreateCustomer(customerRepository),
+    getCustomerList = new GetCustomerList(customerRepository),
 
-const parseSyntax = new ParseSyntax
+    createCustomerContact = new CreateCustomerContact(customerContactRepository),
+    getCustomerContactList = new GetCustomerContactList(customerContactRepository),
 
-const parseSemantic = new ParseSemantic({
-    productRules
-})
+    createOrder = new CreateOrder(
+        mysqlAdapter,
+        orderRepository,
+        orderItemRepository
+    ),
+    getOrderList = new GetOrderList(orderRepository)
 
-const createCustomer = new CreateCustomer({
-    customerRepository
-})
-
-const getCustomerList = new GetCustomerList({
-    customerRepository
-})
-
-const createCustomerContact = new CreateCustomerContact({
-    customerContactRepository
-})
-
-const getCustomerContactList = new GetCustomerContactList({
-    customerContactRepository
-})
-
-const expressAdapter = new ExpressAdapter({
+const expressAdapter = new ExpressAdapter(
     parseLexer,
     parseSyntax,
     parseSemantic,
     createCustomer,
     getCustomerList,
     createCustomerContact,
-    getCustomerContactList
-})
-
-// new BaileysAdapter({
-//     parseLexer, parseSyntax, parseSemantic
-// })
+    getCustomerContactList,
+    createOrder,
+    getOrderList
+)
 
 try {
     const port = process.env.HTTP_PORT || 80

@@ -4,22 +4,13 @@ import ParseSyntax from "../../../../application/usecases/parser/parse-syntax/pa
 import BaseController from "../base/controller.base.ts"
 import ParseSemantic from "../../../../application/usecases/parser/parse-semantic/parseSemantic.ts"
 
-interface deps {
-    parseLexer: ParseLexer
-    parseSyntax: ParseSyntax
-    parseSemantic: ParseSemantic
-}
-
 export default class ParseMessageController extends BaseController {
-    private parseLexer: ParseLexer
-    private parseSyntax: ParseSyntax
-    private parseSemantic: ParseSemantic
-
-    constructor(deps: deps) {
+    constructor(
+        private readonly parseLexer: ParseLexer,
+        private readonly parseSyntax: ParseSyntax,
+        private readonly parseSemantic: ParseSemantic
+    ) {
         super()
-        this.parseLexer = deps.parseLexer
-        this.parseSyntax = deps.parseSyntax
-        this.parseSemantic = deps.parseSemantic
     }
 
     get = (req: Request, res: Response) => {

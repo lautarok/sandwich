@@ -2,7 +2,7 @@ import type OrderSyntax from "../../../../domain/parser/orderSyntax.ts"
 import type Token from "../../../../domain/parser/token.ts"
 import BaseUsecase from "../../../base/baseUsecase.ts"
 
-export default class ParseSyntax implements BaseUsecase<OrderSyntax> {
+export default class ParseSyntax implements BaseUsecase {
     private createOrderBlock(tokenGroup: Token[]) {
         const product = tokenGroup.find(t => t.type === "product")?.value,
             quantities = [...tokenGroup.filter(t => t.type === "quantity")]

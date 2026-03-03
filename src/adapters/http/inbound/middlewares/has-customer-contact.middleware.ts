@@ -13,7 +13,7 @@ export default class HasCustomerContactMiddleware implements BaseMiddleware {
         if(!body["customerId"]) {
             throw new InvalidInputError("`customerId` field is required")
         } else if (!Number.isInteger(body["customerId"]) || body["customerId"] <= 0) {
-            throw new InvalidInputError("`customerId` field must be a positive int")
+            throw new InvalidInputError("`customerId` field must be a positive integer")
         }
 
         if (!body["type"]) {

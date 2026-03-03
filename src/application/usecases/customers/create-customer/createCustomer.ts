@@ -8,16 +8,10 @@ interface CustomerRepository {
     }): Promise<Customer>
 }
 
-interface deps {
-    customerRepository: CustomerRepository
-}
-
-export class CreateCustomer implements BaseUsecase<Customer> {
-    customerRepository: CustomerRepository
-
-    constructor(deps: deps) {
-        this.customerRepository = deps.customerRepository
-    }
+export class CreateCustomer implements BaseUsecase {
+    constructor(
+        private readonly customerRepository: CustomerRepository
+    ) {}
 
     async execute({
         name,

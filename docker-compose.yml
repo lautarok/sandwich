@@ -25,7 +25,7 @@ services:
     environment:
       HTTP_PORT: 3000
       MYSQL_URI: mysql://root:default@mysql:3306/sandwich
-      CONFIG_FOLDER: gm-publicidad
+      CONFIG_FOLDER: entre-capas
     ports:
       - "3000:3000"
 

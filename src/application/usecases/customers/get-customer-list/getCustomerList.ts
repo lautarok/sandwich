@@ -3,19 +3,16 @@ import type BaseUsecase from "../../../base/baseUsecase.ts"
 import type PaginationInput from "../../../dtos/pagination.input.ts"
 
 interface CustomerRepository {
-    findMany: (pagination: PaginationInput) => Promise<Customer[]>
+    findMany: (pagination: PaginationInput) => Promise<{
+        list: Customer[],
+        count: number
+    }>
 }
 
-interface deps {
-    customerRepository: CustomerRepository
-}
-
-export default class GetCustomerList implements BaseUsecase<Customer[]> {
-    private customerRepository: CustomerRepository
-
-    constructor(deps: deps) {
-        this.customerRepository = deps.customerRepository
-    }
+export default class GetCustomerList implements BaseUsecase {
+    constructor(
+        private readonly customerRepository: CustomerRepository
+    ) {}
 
     execute({
         page,

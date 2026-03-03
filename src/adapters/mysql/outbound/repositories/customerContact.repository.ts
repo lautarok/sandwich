@@ -1,24 +1,20 @@
 import mysql2 from "mysql2/promise"
 import type PaginationInput from "../../../../application/dtos/pagination.input.ts"
 import type CustomerContact from "../../../../domain/entities/customerContact.ts"
-import type BaseRepository from "../base/repository.base.ts"
+import BaseRepository from "../base/repository.base.ts"
 import MysqlAdapter from "../../mysql.ts"
 
-interface deps {
-    adapter: MysqlAdapter
-}
-
-export default class CustomerContactRepository implements BaseRepository<CustomerContact> {
-    private adapter: MysqlAdapter
-
-    constructor(deps: deps) {
-        this.adapter = deps.adapter
+export default class CustomerContactRepository extends BaseRepository<CustomerContact> {
+    constructor(
+        mysqlAdapter: MysqlAdapter
+    ) {
+        super(mysqlAdapter)
     }
 
-    async findMany(dto: PaginationInput, poolCtx?: mysql2.Pool): Promise<CustomerContact[]> {
-        const pool = poolCtx ?? this.adapter.getPool()
+    async findMany(dto: PaginationInput, poolCtx?: mysql2.Pool) {
+        const pool = poolCtx ?? this.mysqlAdapter.getPool()
 
-        const [rows] = await pool.execute<CustomerContact[] & mysql2.QueryResult>(`
+        const [list] = await pool.execute<unknown[] & mysql2.QueryResult>(`
             SELECT *
             FROM customer_contacts
             ORDER BY id DESC
@@ -26,11 +22,28 @@ export default class CustomerContactRepository implements BaseRepository<Custome
             OFFSET ${(dto.page - 1) * dto.limit}
         `)
 
-        return rows
+        const [count] = await pool.execute(`
+            SELECT COUNT(id)
+            FROM customer_contacts
+        `)
+
+        return {
+            list: list.map<CustomerContact>((item: unknown) => ({
+                id: item["id"],
+                type: item["type"],
+                value: item["value"],
+                createdAt: item["created_at"],
+                updatedAt: item["updated_at"]
+            })),
+            count: count[0]["COUNT(id)"]
+        }
     }
 
-    async createOne(model: CustomerContact, poolCtx?: mysql2.Pool): Promise<CustomerContact> {
-        const pool = poolCtx ?? this.adapter.getPool()
+    async createOne(
+        model: CustomerContact & {customerId: number},
+        poolCtx?: mysql2.Pool
+    ): Promise<CustomerContact> {
+        const pool = poolCtx ?? this.mysqlAdapter.getPool()
 
         const [result] = await pool.execute<mysql2.ResultSetHeader>(`
             INSERT INTO customer_contacts (

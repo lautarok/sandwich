@@ -5,16 +5,10 @@ import type OrderSyntaxBlock from "../../../../domain/parser/orderSyntaxBlock.ts
 import type ProductRulesPort from "../../../../ports/productRules.port.ts"
 import BaseUsecase from "../../../base/baseUsecase.ts"
 
-interface deps {
-    productRules: ProductRulesPort
-}
-
-export default class ParseSemantic implements BaseUsecase<Order> {
-    private productRules: ProductRulesPort
-
-    constructor(deps: deps) {
-        this.productRules = deps.productRules
-    }
+export default class ParseSemantic implements BaseUsecase {
+    constructor(
+        private readonly productRules: ProductRulesPort
+    ) {}
 
     private blockToItems(blocks: OrderSyntaxBlock[]): OrderItem[] {
         let output: OrderItem[] = []

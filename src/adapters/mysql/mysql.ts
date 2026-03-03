@@ -1,16 +1,14 @@
 import mysql2 from "mysql2/promise"
 
-interface deps {
-    multipleStatements?: boolean
-}
-
 export default class MysqlAdapter {
     private pool: mysql2.Pool
 
-    constructor(deps?: deps) {
+    constructor(options?: {
+        multipleStatements?: boolean
+    }) {
         this.pool = mysql2.createPool({
             uri: process.env.MYSQL_URI,
-            multipleStatements: !!deps?.multipleStatements
+            multipleStatements: !!options?.multipleStatements
         })
     }
 
@@ -22,6 +20,7 @@ export default class MysqlAdapter {
         const connection = await this.pool.getConnection()
 
         try {
+            await connection.beginTransaction()
             const result = await callback(connection)
             await connection.commit()
             return result

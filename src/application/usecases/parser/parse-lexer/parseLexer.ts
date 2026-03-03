@@ -2,16 +2,10 @@ import type Token from "../../../../domain/parser/token.ts"
 import type DictionaryPort from "../../../../ports/dictionary.port.ts"
 import BaseUsecase from "../../../base/baseUsecase.ts"
 
-interface deps {
-    dictionary: DictionaryPort
-}
-
-class ParseLexer implements BaseUsecase<Token[]> {
-    private dictionary: DictionaryPort
-
-    constructor(deps: deps) {
-        this.dictionary = deps.dictionary
-    }
+class ParseLexer implements BaseUsecase {
+    constructor(
+        private readonly dictionary: DictionaryPort
+    ) {}
 
     private getWords(input: string): string[] {
         let words = input.toLowerCase()

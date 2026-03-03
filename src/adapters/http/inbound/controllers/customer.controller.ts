@@ -3,19 +3,13 @@ import GetCustomerList from "../../../../application/usecases/customers/get-cust
 import BaseController from "../base/controller.base.ts"
 import { type Request, type Response } from "express"
 
-interface deps {
-    createCustomer: CreateCustomer
-    getCustomerList: GetCustomerList
-}
-
 export default class CustomerController extends BaseController {
-    private createCustomer: CreateCustomer
-    private getCustomerList: GetCustomerList
 
-    constructor(deps: deps) {
+    constructor(
+        private createCustomer: CreateCustomer,
+        private getCustomerList: GetCustomerList
+    ) {
         super()
-        this.createCustomer = deps.createCustomer
-        this.getCustomerList = deps.getCustomerList
     }
 
     get = async (_: Request, res: Response) => {
@@ -24,9 +18,12 @@ export default class CustomerController extends BaseController {
             limit: number
         }
 
-        const result = await this.getCustomerList.execute(pagination)
+        const {count, list} = await this.getCustomerList.execute(pagination)
 
-        res.status(200).json(result)
+        res.status(200).json({
+            count,
+            list
+        })
     }
 
     post = async (req: Request, res: Response) => {
