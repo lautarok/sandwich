@@ -13,8 +13,8 @@ describe("parse semantic usecase", () => {
                 ],
                 quantityStep: 1,
                 features: [
-                    "feature one",
-                    "feature two"
+                    {name: "feature one"},
+                    {name: "feature two"}
                 ]
             },
             "product two": {
@@ -22,20 +22,18 @@ describe("parse semantic usecase", () => {
                 multiplicator: 5,
                 quantityStep: 4,
                 features: [
-                    "feature three",
+                    {name: "feature three"},
                 ]
             },
             "product three": {
                 features: [
-                    "feature four",
-                    "feature five"
+                    {name: "feature four"},
+                    {name: "feature five"}
                 ]
             }
         })
 
-        return new ParseSemantic({
-            productRules
-        })
+        return new ParseSemantic(productRules)
     }
 
     const parseSemantic = createMock()

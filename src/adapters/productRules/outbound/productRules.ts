@@ -28,4 +28,8 @@ export default class ProductRules implements ProductRulesPort {
 
         return matchRules
     }
+
+    getDefaultProduct(): string {
+        return Object.keys(this.rules)[0]
+    }
 }

@@ -14,10 +14,15 @@ export default class ParseSemantic implements BaseUsecase {
         let output: OrderItem[] = []
 
         for (let i = 0; i < blocks.length; i++) {
-            const currentBlock = blocks[i],
-                rules = this.productRules.getProductRules(
-                    currentBlock.product, currentBlock.features
-                )
+            const currentBlock = blocks[i]
+
+            if (!currentBlock.product) {
+                currentBlock.product = this.productRules.getDefaultProduct()
+            }
+
+            const rules = this.productRules.getProductRules(
+                currentBlock.product, currentBlock.features
+            )
 
             if (!rules) continue
 
@@ -122,7 +127,7 @@ export default class ParseSemantic implements BaseUsecase {
             }
 
             return acc
-        }, []).filter(item => item.product && item.quantity && item.price)
+        }, [])
     }
 
     execute(syntax: OrderSyntax) {
