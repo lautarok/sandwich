@@ -1,5 +1,6 @@
 export default interface OrderItem {
-    product?: string
-    quantity?: number
+    product: string
     feature: string
+    quantity: number
+    price: number
 }

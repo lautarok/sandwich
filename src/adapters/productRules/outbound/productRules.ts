@@ -8,9 +8,24 @@ export default class ProductRules implements ProductRulesPort {
         this.rules = rules
     }
 
-    getProductRules(product: string) {
-        const matchRules = this.rules[product]
+    getProductRules(product: string, features?: string[]) {
+        const matchRules = {...this.rules[product]}
         if (!matchRules) return null
+
+        features?.forEach(feature => {
+            const matchFeature = matchRules.features.find(f => f.name === feature)
+
+            if (!matchFeature || !matchFeature.addPrice) {
+                return
+            }
+
+            if (!matchRules.price) {
+                matchRules.price = 9999
+            }
+
+            matchRules.price += matchFeature.addPrice
+        })
+
         return matchRules
     }
 }

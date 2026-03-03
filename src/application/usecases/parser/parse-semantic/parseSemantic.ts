@@ -15,11 +15,13 @@ export default class ParseSemantic implements BaseUsecase {
 
         for (let i = 0; i < blocks.length; i++) {
             const currentBlock = blocks[i],
-                rules = this.productRules.getProductRules(currentBlock.product)
+                rules = this.productRules.getProductRules(
+                    currentBlock.product, currentBlock.features
+                )
 
             if (!rules) continue
 
-            if (!rules.features?.includes(currentBlock.features[0])) {
+            if (!rules.features?.map(f => f.name).includes(currentBlock.features[0])) {
                 currentBlock.features = [rules.default]
             }
 
@@ -37,8 +39,8 @@ export default class ParseSemantic implements BaseUsecase {
                 })
             }
 
-            currentBlock.features.forEach((feature, index) => {
-                if (!rules.features.includes(feature)) {
+            currentBlock.features?.forEach((feature, index) => {
+                if (!rules.features.map(f => f.name).includes(feature)) {
                     currentBlock.features[index] = rules.default
                 }
             })
@@ -59,14 +61,18 @@ export default class ParseSemantic implements BaseUsecase {
                         output.push({
                             quantity,
                             product: currentBlock.product,
-                            feature: alternate[(alternateIndex + index) % alternate.length]
+                            feature: alternate[(alternateIndex + index) % alternate.length],
+                            price: rules.price * quantity
                         })
                     })
                 } else {
+                    const quantity = currentBlock.quantities.reduce((a, b) => a + b)
+
                     output.push({
-                        quantity: currentBlock.quantities.reduce((a, b) => a + b),
+                        quantity,
                         product: currentBlock.product,
-                        feature: currentBlock.features[0]
+                        feature: currentBlock.features[0],
+                        price: rules.price * quantity
                     })
                 }
 
@@ -81,7 +87,8 @@ export default class ParseSemantic implements BaseUsecase {
                         output.push({
                             quantity,
                             feature,
-                            product: currentBlock.product
+                            product: currentBlock.product,
+                            price: rules.price * quantity
                         })
                     })
                 }
@@ -92,7 +99,8 @@ export default class ParseSemantic implements BaseUsecase {
             output.push({
                 quantity: currentBlock.quantities[0],
                 product: currentBlock.product,
-                feature: currentBlock.features[0]
+                feature: currentBlock.features[0],
+                price: rules.price * currentBlock.quantities[0]
             })
         }
 

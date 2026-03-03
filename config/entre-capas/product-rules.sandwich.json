@@ -3,9 +3,10 @@
         "default": "jamón y queso",
         "multiplicator": 12,
         "quantityStep": 6,
+        "price": 1100000,
         "features": [
-            "jamón y queso",
-            "salame"
+            {"name": "jamón y queso"},
+            {"name": "salame"}
         ],
         "alternate": [
             "jamón y queso",
@@ -17,9 +18,10 @@
         "default": "jamón y queso",
         "quantityStep": 6,
         "multiplicator": 12,
+        "price": 1000000,
         "features": [
-            "jamón y queso",
-            "verduras"
+            {"name": "jamón y queso"},
+            {"name": "verduras", "addPrice": 300000}
         ],
         "alternate": [
             "jamón y queso",

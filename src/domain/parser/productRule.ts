@@ -2,6 +2,7 @@ export default interface ProductRule {
     default?: string,
     multiplicator?: number,
     quantityStep?: number,
-    features?: string[]
+    features?: {name: string, addPrice?: number}[]
     alternate?: string[]
+    price?: number
 }
