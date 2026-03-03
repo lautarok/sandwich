@@ -66,7 +66,7 @@ export default class ExpressRouter {
         const routerGroup = express.Router()
 
         routerGroup.get(
-            "parse-message",
+            "/parse-message",
             this.hasMessageMiddleware.middleware,
             this.parseMessageController.get
         )
