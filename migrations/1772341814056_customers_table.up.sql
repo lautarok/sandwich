@@ -6,3 +6,9 @@ CREATE TABLE customers (
     `updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
         ON UPDATE CURRENT_TIMESTAMP
 );
+
+INSERT INTO customers (
+    id, name, surname
+) VALUES (
+    1, 'Lautaro', 'Kazalukian'
+);

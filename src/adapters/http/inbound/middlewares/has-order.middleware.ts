@@ -24,7 +24,19 @@ export default class HasOrderMiddleware implements BaseMiddleware {
         } else if (
             body["customerId"] >= 9999
         ) {
-            throw new InvalidInputError("`customerId` must be a maximum of 1")
+            throw new InvalidInputError("`customerId` must be a maximum of 9999")
+        }
+
+        if (!body["total"]) {
+            throw new InvalidInputError("`total` field is required")
+        } else if (
+            body["total"] <= 0
+        ) {
+            throw new InvalidInputError("`total` must be a positive number")
+        } else if (
+            body["total"] >= 99999999.999
+        ) {
+            throw new InvalidInputError("`total` must be a maximum of 99999999.999")
         }
 
         if (!body["items"]) {

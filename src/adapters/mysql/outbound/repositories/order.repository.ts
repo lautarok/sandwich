@@ -124,8 +124,8 @@ export default class OrderRepository extends BaseRepository<Order> {
         const pool = poolCtx ?? this.mysqlAdapter.getPool()
 
         const [result] = await pool.execute<mysql2.ResultSetHeader>(`
-            INSERT INTO orders (customer_id)
-            VALUES ('${order.customer.id}')
+            INSERT INTO orders (customer_id, total)
+            VALUES ('${order.customer.id}', ${order.total})
         `)
         
         const [rows] = await pool.execute(`

@@ -33,7 +33,10 @@ export default class CreateOrder implements BaseUsecase {
         const order = {
             customer: {
                 id: customerId
-            }
+            },
+            total: items.reduce((prev, curr) =>
+                prev + curr.price
+            , 0)
         }
 
         let output: null | Order = null
