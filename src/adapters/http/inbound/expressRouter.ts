@@ -9,6 +9,8 @@ import CustomerController from "./controllers/customer.controller.ts"
 import { CreateCustomer } from "../../../application/usecases/customers/create-customer/createCustomer.ts"
 import PaginationMiddleware from "./middlewares/pagination.middleware.ts"
 import GetCustomerList from "../../../application/usecases/customers/get-customer-list/getCustomerList.ts"
+import { UpdateCustomer } from "../../../application/usecases/customers/update-customer/updateCustomer.ts"
+import { DeleteCustomer } from "../../../application/usecases/customers/delete-customer/deleteCustomer.ts"
 import CreateCustomerContact from "../../../application/usecases/customer-contacts/create-customer-contact/createCustomerContact.ts"
 import GetCustomerContactList from "../../../application/usecases/customer-contacts/get-customer-contact-list/getCustomerContactList.ts"
 import HasCustomerContactMiddleware from "./middlewares/has-customer-contact.middleware.ts"
@@ -36,6 +38,8 @@ export default class ExpressRouter {
         private readonly parseSemantic: ParseSemantic,
         private readonly createCustomer: CreateCustomer,
         private readonly getCustomerList: GetCustomerList,
+        private readonly updateCustomer: UpdateCustomer,
+        private readonly deleteCustomer: DeleteCustomer,
         private readonly createCustomerContact: CreateCustomerContact,
         private readonly getCustomerContactList: GetCustomerContactList,
         private readonly createOrder: CreateOrder,
@@ -51,7 +55,7 @@ export default class ExpressRouter {
             this.parseLexer, this.parseSyntax, this.parseSemantic
         )
         this.customerController = new CustomerController(
-            this.createCustomer, this.getCustomerList
+            this.createCustomer, this.getCustomerList, this.updateCustomer, this.deleteCustomer
         )
         this.customerContactController = new CustomerContactController(
             this.createCustomerContact, this.getCustomerContactList
@@ -81,6 +85,14 @@ export default class ExpressRouter {
             "/",
             this.hasCustomerMiddleware.middleware,
             this.customerController.post
+        )
+        customerRouter.put(
+            "/:id",
+            this.customerController.put
+        )
+        customerRouter.delete(
+            "/:id",
+            this.customerController.delete
         )
         routerGroup.use("/customer", customerRouter)
 

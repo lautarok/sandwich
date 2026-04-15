@@ -10,6 +10,8 @@ import { CreateCustomer } from "../../application/usecases/customers/create-cust
 import CustomerRepository from "../../adapters/mysql/outbound/repositories/customer.repository.ts"
 import MysqlAdapter from "../../adapters/mysql/mysql.ts"
 import GetCustomerList from "../../application/usecases/customers/get-customer-list/getCustomerList.ts"
+import { UpdateCustomer } from "../../application/usecases/customers/update-customer/updateCustomer.ts"
+import { DeleteCustomer } from "../../application/usecases/customers/delete-customer/deleteCustomer.ts"
 import CustomerContactRepository from "../../adapters/mysql/outbound/repositories/customerContact.repository.ts"
 import CreateCustomerContact from "../../application/usecases/customer-contacts/create-customer-contact/createCustomerContact.ts"
 import GetCustomerContactList from "../../application/usecases/customer-contacts/get-customer-contact-list/getCustomerContactList.ts"
@@ -37,6 +39,8 @@ const parseLexer = new ParseLexer(dictionary),
 
     createCustomer = new CreateCustomer(customerRepository),
     getCustomerList = new GetCustomerList(customerRepository),
+    updateCustomer = new UpdateCustomer(customerRepository),
+    deleteCustomer = new DeleteCustomer(customerRepository),
 
     createCustomerContact = new CreateCustomerContact(customerContactRepository),
     getCustomerContactList = new GetCustomerContactList(customerContactRepository),
@@ -54,6 +58,8 @@ const expressAdapter = new ExpressAdapter(
     parseSemantic,
     createCustomer,
     getCustomerList,
+    updateCustomer,
+    deleteCustomer,
     createCustomerContact,
     getCustomerContactList,
     createOrder,

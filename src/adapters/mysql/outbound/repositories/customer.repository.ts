@@ -88,4 +88,80 @@ export default class CustomerRepository extends BaseRepository<Customer> {
             updatedAt: rows[0]["updated_at"]
         }
     }
+
+    async findOne(id: number, poolCtx?: mysql2.Pool): Promise<Customer | null> {
+        const pool = poolCtx ?? this.mysqlAdapter.getPool()
+        
+        const [rows] = await pool.execute(`
+            SELECT
+                customers.*,
+                IFNULL(
+                    (
+                        SELECT JSON_ARRAYAGG(
+                            JSON_OBJECT(
+                                'id', customer_contacts.id,
+                                'type', customer_contacts.type,
+                                'value', customer_contacts.value,
+                                'created_at', customer_contacts.created_at,
+                                'updated_at', customer_contacts.updated_at
+                            )
+                        )
+                        FROM customer_contacts
+                        WHERE customer_contacts.customer_id = customers.id
+                    ),
+                    JSON_ARRAY()
+                ) AS contacts
+            FROM customers
+            WHERE customers.id = ${id}
+        `)
+
+        if (rows.length === 0) {
+            return null
+        }
+
+        const item = rows[0]
+        return {
+            id: item["id"],
+            name: item["name"],
+            surname: item["surname"] || undefined,
+            contacts: (item["contacts"] as unknown[]).map<CustomerContact>(contact => ({
+                id: contact["id"],
+                type: contact["type"],
+                value: contact["value"],
+                createdAt: contact["created_at"],
+                updatedAt: contact["updated_at"]
+            })),
+            createdAt: item["created_at"],
+            updatedAt: item["updated_at"]
+        }
+    }
+
+    async updateOne(id: number, model: { name?: string, surname?: string }, poolCtx?: mysql2.Pool): Promise<Customer | null> {
+        const pool = poolCtx ?? this.mysqlAdapter.getPool()
+        
+        const updates = []
+        if (model.name !== undefined) updates.push(`name = '${model.name}'`)
+        if (model.surname !== undefined) updates.push(`surname = ${model.surname ? `'${model.surname}'` : "NULL"}`)
+        
+        if (updates.length === 0) {
+            return await this.findOne(id, pool)
+        }
+
+        await pool.execute(`
+            UPDATE customers
+            SET ${updates.join(', ')}, updated_at = NOW()
+            WHERE id = ${id}
+        `)
+
+        return await this.findOne(id, pool)
+    }
+
+    async deleteOne(id: number, poolCtx?: mysql2.Pool): Promise<void> {
+        const pool = poolCtx ?? this.mysqlAdapter.getPool()
+        
+        await pool.execute(`
+            DELETE FROM customers
+            WHERE id = ${id}
+        `)
+    }
 }
